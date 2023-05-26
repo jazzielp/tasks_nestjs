@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: tasks_db
+      MYSQL_USER: admin
+      MYSQL_ROOT_PASSWORD: Toluca01
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data:/var/lib/mysql
