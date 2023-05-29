@@ -1,7 +1,8 @@
-import { Task } from 'src/task/entities/task.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
+
+import { Task } from '../../task/entities/task.entity';
 import { BaseEntity } from '../../config/base.entity';
 import { ROLES } from '../../constants/roles';
-import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -17,7 +18,7 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ type: 'enum', enum: ROLES })
   role: ROLES;
 
   @OneToMany(() => Task, (task) => task.user)

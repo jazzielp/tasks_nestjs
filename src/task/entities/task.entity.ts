@@ -1,7 +1,7 @@
 import { Entity, Column, ManyToOne } from 'typeorm';
 
 import { BaseEntity } from '../../config/base.entity';
-import { User } from 'src/user/entities/user.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity('tasks')
 export class Task extends BaseEntity {

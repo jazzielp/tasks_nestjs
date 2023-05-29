@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
+import * as Joi from 'Joi';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { UserModule } from './user/user.module';
 import { TaskModule } from './task/task.module';
 import { AuthModule } from './auth/auth.module';
-import * as Joi from 'Joi';
+import { DataSourceConfig } from './config/data.source';
 
 @Module({
   imports: [
@@ -19,6 +22,7 @@ import * as Joi from 'Joi';
         DB_NAME: Joi.string().required(),
       }),
     }),
+    TypeOrmModule.forRoot(DataSourceConfig),
     UserModule,
     TaskModule,
     AuthModule,
