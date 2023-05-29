@@ -7,7 +7,7 @@ import { ROLES } from '../../constants/roles';
 @Entity('users')
 export class User extends BaseEntity {
   @Column()
-  fistName: string;
+  firstName: string;
 
   @Column()
   lastName: string;

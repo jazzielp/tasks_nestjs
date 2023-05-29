@@ -5,7 +5,7 @@ import { ROLES } from '../../constants/roles';
 export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
-  readonly fistName: string;
+  readonly firstName: string;
 
   @IsNotEmpty()
   @IsString()
