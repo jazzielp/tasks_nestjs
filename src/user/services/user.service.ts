@@ -26,7 +26,16 @@ export class UserService {
   //Find all
   async findAll(): Promise<User[]> {
     try {
-      const users: User[] = await this.userRepository.find();
+      const users: User[] = await this.userRepository.find({
+        select: {
+          id: true,
+          createdAt: true,
+          updatedAt: true,
+          firstName: true,
+          lastName: true,
+          role: true,
+        },
+      });
       if (users.length === 0) {
         throw new ErrorManager({
           type: 'BAD_REQUEST',
@@ -43,7 +52,22 @@ export class UserService {
   async findOne(id: number): Promise<User> {
     try {
       const user: User = await this.userRepository
-        .createQueryBuilder('users')
+        .createQueryBuilder('user')
+        .leftJoinAndSelect('user.tasks', 'tasks')
+        .select([
+          'user.id',
+          'user.createdAt',
+          'user.updatedAt',
+          'user.firstName',
+          'user.lastName',
+          'user.role',
+          'tasks.id',
+          'tasks.createdAt',
+          'tasks.updatedAt',
+          'tasks.name',
+          'tasks.description',
+          'tasks.status',
+        ])
         .where({ id })
         .getOne();
       if (!user) {
