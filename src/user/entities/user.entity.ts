@@ -21,6 +21,6 @@ export class User extends BaseEntity {
   @Column({ type: 'enum', enum: ROLES })
   role: ROLES;
 
-  @OneToMany(() => Task, (task) => task.user)
+  @OneToMany(() => Task, (tasks) => tasks.user)
   tasks: Task[];
 }
