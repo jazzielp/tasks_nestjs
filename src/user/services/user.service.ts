@@ -9,7 +9,9 @@ import { ErrorManager } from 'src/utils/error.manager';
 
 @Injectable()
 export class UserService {
-  @InjectRepository(User) private readonly userRepository: Repository<User>;
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
 
   //Creation
   async create(body: CreateUserDto) {
@@ -77,6 +79,26 @@ export class UserService {
         });
       }
 
+      return user;
+    } catch (error) {
+      throw ErrorManager.createSignatureError(error.message);
+    }
+  }
+
+  //Find One by email
+  async findOneByEmail(email: string): Promise<User> {
+    try {
+      const user: User = await this.userRepository
+        .createQueryBuilder('user')
+        .where({ email })
+        .getOne();
+
+      if (!user) {
+        throw new ErrorManager({
+          type: 'BAD_REQUEST',
+          message: 'Record not found',
+        });
+      }
       return user;
     } catch (error) {
       throw ErrorManager.createSignatureError(error.message);
