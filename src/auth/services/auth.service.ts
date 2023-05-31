@@ -50,7 +50,12 @@ export class AuthService {
         secret: process.env.JWT_SECRET,
         expires: '1h',
       }),
-      user: getUser,
+      user: {
+        id: getUser.id,
+        firstName: getUser.firstName,
+        lastName: getUser.lastName,
+        role: getUser.role,
+      },
     };
   }
 }
