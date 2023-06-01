@@ -8,9 +8,12 @@ import {
   Patch,
   Delete,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+
 import { TaskService } from '../services/task.service';
 import { CreateTaskDto, UpdateTaskDto } from '../dtos/task.dto';
 
+@ApiTags('Tasks')
 @Controller('task')
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}

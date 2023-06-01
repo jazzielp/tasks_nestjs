@@ -14,9 +14,10 @@ import { UserService } from '../services/user.service';
 import { AuthGuard } from '../../auth/guards/auth.guard';
 import { RolesGuard } from '../../auth/guards/roles.guard';
 import { CreateUserDto, UpdateUserDto } from '../dtos/user.dto';
-import { Public } from '../../decorators/public.decorator';
 import { Roles } from '../../auth/decorators/roles.decorator';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Users')
 @Controller('user')
 @UseGuards(AuthGuard, RolesGuard)
 export class UserController {

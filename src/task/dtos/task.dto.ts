@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsString,
@@ -6,19 +6,24 @@ import {
   IsNumber,
   IsPositive,
 } from 'class-validator';
-import { User } from 'src/user/entities/user.entity';
+import { User } from '../../user/entities/user.entity';
+
 export class CreateTaskDto {
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   readonly name: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   readonly description: string;
 
+  @ApiProperty()
   @IsBoolean()
   readonly status: boolean;
 
+  @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
   @IsPositive()
